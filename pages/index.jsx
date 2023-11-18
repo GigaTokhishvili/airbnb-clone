@@ -8,10 +8,8 @@ import Head from "next/head";
 
 export default function Home({ exploreData, cardsData }) {
   return (
-    <div className="">
-      <Head>
-        <title>airbnb clone</title>
-      </Head>
+    <div>
+      <Head><title>airbnb (clone)</title></Head>
 
       <Header />
       <Banner />

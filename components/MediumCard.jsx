@@ -11,6 +11,7 @@ function MediumCard({img, title}) {
                 style={{objectFit: 'cover',}}
                 className='rounded-xl'
                 alt='medium card image'
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
         </div>
         <h3 className='text-2xl mt-3'>{title}</h3>

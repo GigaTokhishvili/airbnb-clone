@@ -9,6 +9,7 @@ function Banner() {
             fill='false'
             style={{objectFit: "cover"}}
             alt='banner image'
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className='absolute top-1/2 w-full text-center'>
             <p className='text-sm sm:text-lg'>Not sure where to go? Perfect.</p>
