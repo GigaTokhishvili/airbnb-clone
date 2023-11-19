@@ -5,15 +5,25 @@ import MapComp from '@/components/MapComp';
 import { format } from 'date-fns';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import londonData from '@/data/londonData';
 
 function Search({ searchResults }) {
+  const [data, setData] = useState([]);
   const [headerActive, setHeaderActive] = useState(false);
   const [closeHeader, setCloseHeader] = useState(false);
   const [days, setDays] = useState();
   const router = useRouter();
   const { location, startDate, endDate, guests } = router.query;
   
-  const data = searchResults.results;
+  useEffect(() => {
+    if (searchResults.results) {
+      setData(searchResults.results)
+    } else {
+      setData(londonData)
+      console.log(searchResults.results)
+
+    }
+  }, [])
 
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
