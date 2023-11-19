@@ -5,34 +5,32 @@ import MapComp from '@/components/MapComp';
 import { format } from 'date-fns';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+// import { getServerSideProps } from 'next/dist/build/templates/pages';
+import { GetServerSideProps } from 'next';
 import londonData from '@/data/londonData';
 
 function Search({ searchResults }) {
-  const [data, setData] = useState([]);
-  const [headerActive, setHeaderActive] = useState(false);
-  const [closeHeader, setCloseHeader] = useState(false);
-  const [days, setDays] = useState();
   const router = useRouter();
   const { location, startDate, endDate, guests } = router.query;
+
+  const [data, setData] = useState([]);
+  const [days, setDays] = useState();
   
   useEffect(() => {
+    calcDay();
+
     if (searchResults.results) {
       setData(searchResults.results)
     } else {
       setData(londonData)
       console.log(searchResults.results)
-
     }
+
   }, [])
 
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
   const range = `${formattedStartDate} - ${formattedEndDate}`;
-
-  const headerActivation = (writing) => {
-    setHeaderActive(writing)
-  }
-
 
   // to calc number of days ---> last day - first day
   const calcDay = () => {
@@ -40,16 +38,10 @@ function Search({ searchResults }) {
     setDays(days);
   }
 
-  useEffect(() => {
-    calcDay();
-  }, [])
-
   return (
-    <div onClick={() => headerActive? setCloseHeader(true) : null}>
+    <div>
         <Header 
           placeholder={`${location} | ${range} | ${guests} guests`}
-          writing={headerActivation}
-          headerClosing={closeHeader ? true : false}
         />
 
         <main className='flex'>
