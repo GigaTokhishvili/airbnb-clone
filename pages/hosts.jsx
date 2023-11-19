@@ -16,13 +16,13 @@ function Hosts() {
     // const [userLat, setUserLat] = useState();
     // const [userLong, setUserLong] = useState();
 
-    if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            // setUserLat(position.coords.latitude)
-            // setUserLong(position.coords.longitude)
-        //   console.log(position.coords.latitude, position.coords.longitude)
-        })
-    }
+    // if(navigator.geolocation) {
+    //     navigator.geolocation.getCurrentPosition(position => {
+    //         setUserLat(position.coords.latitude)
+    //         setUserLong(position.coords.longitude)
+    //       console.log(position.coords.latitude, position.coords.longitude)
+    //     })
+    // }
 
     useEffect(() => {
         overlay ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto'
