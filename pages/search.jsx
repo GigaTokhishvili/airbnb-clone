@@ -14,7 +14,6 @@ function Search({ searchResults }) {
   const { location, startDate, endDate, guests } = router.query;
   
   const data = searchResults.results;
-  console.log(data);
 
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
@@ -95,13 +94,29 @@ function Search({ searchResults }) {
 export default Search
 
 export async function getServerSideProps(context) {
-  const { location } = context.query;
-  const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=%22${location}%22&limit=20`)
-  .then(res => res.json());
+  const { query } = context;
 
-  return {
-    props: {
-      searchResults,
-    }
+  if (!query || !query.location) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const { location } = query;
+
+  try {
+    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`)
+      .then(res => res.json());
+
+    return {
+      props: {
+        searchResults,
+      }
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
   }
 }

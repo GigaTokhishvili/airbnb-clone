@@ -17,7 +17,7 @@ function SmallCard( {img, location, distance} ) {
 
         <div>
           <h2>{location}</h2>
-          <he className='text-gray-500'>{distance}</he>
+          <h4 className='text-gray-500'>{distance}</h4>
         </div>
     </div> 
   )

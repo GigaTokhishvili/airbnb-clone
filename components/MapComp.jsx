@@ -25,7 +25,7 @@ function MapComp({ data,  }) {
         setZoom(e.viewState.zoom);
       }}
     >
-      {data?.map((results) => {
+      {/* {data?.map((results) => {
         return (
           <>
             <Marker
@@ -36,7 +36,7 @@ function MapComp({ data,  }) {
             </Marker>
           </>
         )
-      })}
+      })} */}
     </Map>
   )
 }

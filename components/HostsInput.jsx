@@ -74,6 +74,17 @@ function HostsInput() {
                     setTooltipoP(0)
                     setVisibility('hidden');
                 }}
+                onTouchStart={(e) => {
+                    setInputWidth(e.target.clientWidth);
+                    setTooltipPos(0);
+                    setTooltipoP(1)
+                    setVisibility('visible');
+                }}
+                onTouchEnd={() => {
+                    setTooltipPos(70);
+                    setTooltipoP(0)
+                    setVisibility('hidden');
+                }}
                     
                 value={inputValue} 
                 className='inputSlider z-10 outline-none w-full h-1 mb-6 rounded-full appearance-none cursor-pointer' 
