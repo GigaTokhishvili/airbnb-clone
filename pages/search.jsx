@@ -115,7 +115,7 @@ export async function getServerSideProps(context) {
   const { location } = query;
 
   try {
-    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`)
+    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"paris"`)}&limit=20`)
       .then(res => res.json());
 
     return {
