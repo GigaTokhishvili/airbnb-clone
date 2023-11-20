@@ -24,6 +24,7 @@ function Header( {placeholder, writing, headerClosing} ) {
   const handleSelect = (ranges) => {
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
+    console.log(ranges.selection.startDate, ranges.selection.endDate)
   }
 
   const handleChange = (e) => {

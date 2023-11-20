@@ -5,9 +5,8 @@ import MapComp from '@/components/MapComp';
 import { format } from 'date-fns';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-// import { getServerSideProps } from 'next/dist/build/templates/pages';
-import { GetServerSideProps } from 'next';
 import londonData from '@/data/londonData';
+import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
 
 function Search({ searchResults }) {
   const router = useRouter();
@@ -23,7 +22,6 @@ function Search({ searchResults }) {
       setData(searchResults.results)
     } else {
       setData(londonData)
-      console.log(searchResults.results)
     }
 
   }, [])
@@ -83,12 +81,13 @@ function Search({ searchResults }) {
             </div>
           </section>
 
-          <section className='hidden xl:inline-flex xl:min-w-[600px] xl:h-screen sticky right-0 top-[92px]'>
+          {/* <section className='hidden xl:inline-flex xl:min-w-[600px] xl:h-screen sticky right-0 top-[92px]'>
             <MapComp data={data}/>
-          </section>
+          </section> */}
         </main>
 
         <Footer />
+                
     </div>
   )
 }
@@ -107,7 +106,7 @@ export async function getServerSideProps(context) {
   const { location } = query;
 
   try {
-    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"paris"`)}&limit=20`)
+    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`)
       .then(res => res.json());
 
     return {
