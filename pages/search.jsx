@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import londonData from '@/data/londonData';
 import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
+import Head from 'next/head';
 
 function Search({ searchResults }) {
   const router = useRouter();
@@ -17,12 +18,13 @@ function Search({ searchResults }) {
   
   useEffect(() => {
     calcDay();
+    setData(londonData)
 
-    if (searchResults.results) {
-      setData(searchResults.results)
-    } else {
-      setData(londonData)
-    }
+    // if (searchResults.results) {
+    //   setData(searchResults.results)
+    // } else {
+    //   setData(londonData)
+    // }
 
   }, [])
 
@@ -38,12 +40,13 @@ function Search({ searchResults }) {
 
   return (
     <div>
+      <Head><title>Airbnb Listings (clone)</title></Head>
         <Header 
           placeholder={`${location} | ${range} | ${guests} guests`}
         />
 
         <main className='flex'>
-          <section className='flex-grow pt-14 px-6'>
+          {/* <section className='flex-grow pt-14 px-6'>
             <p className='text-xs'>300+ Stays - {range} for {guests} guests</p>
 
             <h1 className='text-3xl font-semibold mt-2 mb-6'>Stays in {location}</h1>
@@ -79,11 +82,11 @@ function Search({ searchResults }) {
                 </div>
               ))}
             </div>
-          </section>
-
-          {/* <section className='hidden xl:inline-flex xl:min-w-[600px] xl:h-screen sticky right-0 top-[92px]'>
-            <MapComp data={data}/>
           </section> */}
+
+          <section className='hidden xl:inline-flex xl:min-w-[600px] xl:h-screen sticky right-0 top-[92px]'>
+            <MapComp data={data}/>
+          </section>
         </main>
 
         <Footer />
