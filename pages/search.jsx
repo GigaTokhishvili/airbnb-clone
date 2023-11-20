@@ -46,7 +46,7 @@ function Search({ searchResults }) {
         />
 
         <main className='flex'>
-          {/* <section className='flex-grow pt-14 px-6'>
+          <section className='flex-grow pt-14 px-6'>
             <p className='text-xs'>300+ Stays - {range} for {guests} guests</p>
 
             <h1 className='text-3xl font-semibold mt-2 mb-6'>Stays in {location}</h1>
@@ -82,7 +82,7 @@ function Search({ searchResults }) {
                 </div>
               ))}
             </div>
-          </section> */}
+          </section>
 
           <section className='hidden xl:inline-flex xl:min-w-[600px] xl:h-screen sticky right-0 top-[92px]'>
             <MapComp data={data}/>
