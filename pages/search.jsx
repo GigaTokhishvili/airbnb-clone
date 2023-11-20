@@ -9,6 +9,34 @@ import londonData from '@/data/londonData';
 import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
 import Head from 'next/head';
 
+export async function getServerSideProps(context) {
+  const { query } = context;
+
+  if (!query || !query.location) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const { location } = query;
+
+  try {
+    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`)
+      .then(res => res.json());
+
+    return {
+      props: {
+        searchResults,
+      }
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
+}
+
 function Search({ searchResults }) {
   const router = useRouter();
   const { location, startDate, endDate, guests } = router.query;
@@ -18,13 +46,13 @@ function Search({ searchResults }) {
   
   useEffect(() => {
     calcDay();
-    setData(londonData)
+    // setData(londonData)
 
-    // if (searchResults.results) {
-    //   setData(searchResults.results)
-    // } else {
-    //   setData(londonData)
-    // }
+    if (searchResults.results) {
+      setData(searchResults.results)
+    } else {
+      setData(londonData)
+    }
 
   }, [])
 
@@ -97,30 +125,4 @@ function Search({ searchResults }) {
 
 export default Search
 
-export async function getServerSideProps(context) {
-  const { query } = context;
 
-  if (!query || !query.location) {
-    return {
-      notFound: true,
-    };
-  }
-
-  const { location } = query;
-
-  try {
-    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`)
-      .then(res => res.json());
-
-    return {
-      props: {
-        searchResults,
-      }
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      notFound: true,
-    };
-  }
-}
