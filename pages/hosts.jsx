@@ -30,9 +30,9 @@ function Hosts() {
  
 
   return (
-    <div className='overflow-hidden'>
-        
+      <div className='overflow-hidden'>
         <Head><title>Become a Host (clone)</title></Head>
+        
 
         <header className='sticky flex xl:justify-center items-center bg-white w-full top-0 z-50 shadow-md py-5 px-6'>
             <nav className='flex md:w-[1200px] justify-between'>

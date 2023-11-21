@@ -6,7 +6,6 @@ import { format } from 'date-fns';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import londonData from '@/data/londonData';
-import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
 import Head from 'next/head';
 
 function Search({ searchResults }) {
@@ -19,13 +18,12 @@ function Search({ searchResults }) {
   useEffect(() => {
     calcDay();
     console.log(searchResults)
-    setData(searchResults)
 
-    // if (searchResults.results) {
-    //   setData(searchResults)
-    // } else {
-    //   setData(londonData)
-    // }
+    if (searchResults.results) {
+      setData(searchResults)
+    } else {
+      setData(londonData)
+    }
 
   }, [])
 
@@ -64,7 +62,7 @@ function Search({ searchResults }) {
 
 
             <div className='flex flex-col'>
-              {/* {data.results?.map((item) => (
+              {data.results?.map((item) => (
                 <div key={item.id}>
                   <InfoCard
                     key={item.id}
@@ -79,24 +77,10 @@ function Search({ searchResults }) {
                     roomType={item.room_type}
                     roomLat={item.latitude}
                     roomLng={item.longitude}
-                    // amenity1={item.amenities[4]}
-                    // amenity2={item.amenities[2]}
-                    // amenity3={item.amenities[5]}
-                  />
-                </div>
-              ))} */}
-              {data?.map((item) => (
-                <div key={item.img}>
-                  <InfoCard
-                    img={item.img}
-                    city={item.location}
-                    name={item.description}
-                    description={item.description}
-                    price={item.price}
-                    days={days}
                   />
                 </div>
               ))}
+              
             </div>
 
           </section>
@@ -126,9 +110,7 @@ export async function getServerSideProps(context) {
   const { location } = query;
 
   try {
-    // const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`)
-    const searchResults = await fetch(`https://www.jsonkeeper.com/b/5NPS`)
-    .then(res => res.json());
+    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`).then(res => res.json())
 
     return {
       props: {
