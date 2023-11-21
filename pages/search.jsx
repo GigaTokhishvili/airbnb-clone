@@ -19,8 +19,8 @@ function Search({ searchResults }) {
   useEffect(() => {
     calcDay();
 
-    if (searchResults.results) {
-      setData(searchResults)
+    if (searchResults) {
+      setData(searchResults.results)
     } else {
       setData(londonData)
     }
