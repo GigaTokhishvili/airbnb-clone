@@ -8,23 +8,12 @@ import React, { useEffect, useState } from 'react'
 import londonData from '@/data/londonData';
 import Head from 'next/head';
 
-function Search({ searchResults }) {
+function Search({ initialSearchResults }) {
   const router = useRouter();
   const { location, startDate, endDate, guests } = router.query;
 
   const [data, setData] = useState();
   const [days, setDays] = useState();
-  
-  useEffect(() => {
-    calcDay();
-
-    if (searchResults) {
-      setData(searchResults)
-    } else {
-      setData(londonData)
-    }
-
-  }, [searchResults])
 
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
@@ -36,17 +25,30 @@ function Search({ searchResults }) {
     setDays(days);
   }
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`);
+      const searchData = await response.json();
+      setData(searchData);  
+    } catch (error) {
+      console.error(error)
+      setData(londonData);
+    }
+  }
+    
+  useEffect(() => {
+    calcDay();
+
+    if (!initialSearchResults) {
+      fetchData()
+    } 
+
+  }, [initialSearchResults])
+
+
   if (!data?.results) {
     return <div className='flex justify-center items-center h-screen bg-gray-200'><h1 className='text-6xl'>Loading...</h1></div>
   }
-
-  console.log(searchResults.results)
-
-  setTimeout(() => {  
-
-    console.log(searchResults)
-  }, 1000)
-
 
   return (
     <div>
@@ -125,7 +127,7 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        searchResults,
+        initialSearchResults: searchResults,
       }
     };
   } catch (error) {
