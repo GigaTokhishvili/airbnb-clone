@@ -29,7 +29,7 @@ function Search({ initialSearchResults }) {
     try {
       const response = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`);
       const searchData = await response.json();
-      setData(searchData);  
+      setData(searchData);
     } catch (error) {
       console.error(error)
       setData(londonData);
@@ -41,12 +41,14 @@ function Search({ initialSearchResults }) {
 
     if (!initialSearchResults) {
       fetchData()
-    } 
+    } else {
+      setData(initialSearchResults)
+    }
 
   }, [initialSearchResults])
 
 
-  if (!data?.results) {
+  if (!data) {
     return <div className='flex justify-center items-center h-screen bg-gray-200'><h1 className='text-6xl'>Loading...</h1></div>
   }
 
