@@ -36,13 +36,13 @@ function Search({ searchResults }) {
     setDays(days);
   }
 
-  if (!data) {
+  if (!data?.results) {
     return <div className='flex justify-center items-center h-screen bg-gray-200'><h1 className='text-6xl'>Loading...</h1></div>
   }
 
-  console.log(searchResults)
+  console.log(searchResults.results)
 
-  setTimeout(() => {
+  setTimeout(() => {  
 
     console.log(searchResults)
   }, 1000)
@@ -73,7 +73,7 @@ function Search({ searchResults }) {
 
 
             <div className='flex flex-col'>
-              {data.results?.map((item) => (
+              {data?.results?.map((item) => (
                 <div key={item.id}>
                   <InfoCard
                     key={item.id}
