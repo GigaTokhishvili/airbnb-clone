@@ -12,7 +12,7 @@ function Search({ searchResults }) {
   const router = useRouter();
   const { location, startDate, endDate, guests } = router.query;
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const [days, setDays] = useState();
   console.log(searchResults)
   
@@ -25,7 +25,7 @@ function Search({ searchResults }) {
       setData(londonData)
     }
 
-  }, [])
+  }, [searchResults])
 
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
@@ -35,6 +35,10 @@ function Search({ searchResults }) {
   const calcDay = () => {
     const days = (new Date(endDate).getDate()) - (new Date(startDate).getDate()) ;
     setDays(days);
+  }
+
+  if (!data) {
+    return <div className='flex justify-center items-center h-screen bg-gray-200'><h1 className='text-6xl'>Loading...</h1></div>
   }
 
   return (
