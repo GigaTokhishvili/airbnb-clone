@@ -14,10 +14,10 @@ function Search({ searchResults }) {
 
   const [data, setData] = useState([]);
   const [days, setDays] = useState();
+  console.log(searchResults)
   
   useEffect(() => {
     calcDay();
-    console.log(searchResults)
 
     if (searchResults.results) {
       setData(searchResults)
