@@ -14,13 +14,12 @@ function Search({ searchResults }) {
 
   const [data, setData] = useState();
   const [days, setDays] = useState();
-  console.log(searchResults)
   
   useEffect(() => {
     calcDay();
 
     if (searchResults) {
-      setData(searchResults.results)
+      setData(searchResults)
     } else {
       setData(londonData)
     }
@@ -40,6 +39,14 @@ function Search({ searchResults }) {
   if (!data) {
     return <div className='flex justify-center items-center h-screen bg-gray-200'><h1 className='text-6xl'>Loading...</h1></div>
   }
+
+  console.log(searchResults)
+
+  setTimeout(() => {
+
+    console.log(searchResults)
+  }, 1000)
+
 
   return (
     <div>
