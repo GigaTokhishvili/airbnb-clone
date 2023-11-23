@@ -28,7 +28,7 @@ const QNA = [
     },
 ]
 
-function HomeFaq() {
+function HostFaq() {
     const [activeQuestion, setAqctiveQuestion] = useState('');
 
     const handleClick = (e) => {
@@ -58,4 +58,4 @@ function HomeFaq() {
   )
 }
 
-export default HomeFaq;
+export default HostFaq;

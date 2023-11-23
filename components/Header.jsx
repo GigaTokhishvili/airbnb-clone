@@ -12,8 +12,6 @@ function Header( {placeholder, writing, headerClosing} ) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const router = useRouter();
-  
-  // console.log(headerClosing);
 
   const selectionRange = {
     startDate: startDate,
@@ -24,7 +22,6 @@ function Header( {placeholder, writing, headerClosing} ) {
   const handleSelect = (ranges) => {
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
-    console.log(ranges.selection.startDate, ranges.selection.endDate)
   }
 
   const handleChange = (e) => {
@@ -69,7 +66,7 @@ function Header( {placeholder, writing, headerClosing} ) {
         </div>
 
         <div className='flex items-center justify-end space-x-4 text-gray-500'>
-          <p onClick={() => router.push('/hosts')} className='hidden md:inline cursor-pointer hover:shadow-md rounded-full p-3 transition transform duration-300 ease-out'>
+          <p onClick={() => router.push('/hosts')} className='hidden animate-bounce md:inline cursor-pointer hover:bg-neutral-100 rounded-full p-3 transition transform duration-300 ease-out'>
             Become a host
           </p>
           <GlobeAltIcon className='h-6 cursor-pointer' />

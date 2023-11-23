@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map, { Marker } from 'react-map-gl';
 
-function MapComp({ data,  }) {
+function MapComp({ data, userLat, userLong }) {
   const [lat, setLat] = useState(51.43258577998574);
   const [lng, setLng] = useState(-0.19565271801491235);
   const [zoom, setZoom] = useState(9);
@@ -14,8 +14,8 @@ function MapComp({ data,  }) {
     <Map
       width='100%'
       height='100%'
-      latitude={lat ? lat : 51.43258577998574}
-      longitude={lng ? lng : -0.19565271801491235}
+      latitude={userLat || lat }
+      longitude={userLong || lng}
       zoom= {zoom}
       mapStyle='mapbox://styles/dumbledore-rules/cloqgs23j00kh01qy0qi60c8c'
       mapboxAccessToken={process.env.mapbox_key}

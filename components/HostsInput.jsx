@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function HostsInput() {
+function HostsInput({ estimate }) {
     const [inputValue, setInputValue] = useState(7);
     const [inputPercentage, setInputPercentage] = useState(50);
     const [inputWidth, setInputWidth] = useState(408);
@@ -91,7 +91,7 @@ function HostsInput() {
                 style={{background: `linear-gradient(to right, #262626, #262626 0, #262626 ${inputPercentage}%, #CBD5E1 ${inputPercentage}%, #CBD5E1 0%)`}}
             />
 
-            <span className='text-slate-600 underline cursor-pointer mb-8'>Learn how we estimate your earnings</span>
+            <span onClick={() => estimate()} className='text-slate-600 underline cursor-pointer mb-8'>Learn how we estimate your earnings</span>
 
             <div className='my-5 flex w-full items-center px-5 py-3 tracking-tighter rounded-full border cursor-pointer'>
                 <svg className='block fill-none h-4 w-4 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" stroke='rgb(255, 56, 92)' strokeWidth='4' overflow='visible'><path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path></svg>
