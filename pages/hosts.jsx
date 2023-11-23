@@ -13,8 +13,8 @@ import HostsEstimate from '@/components/HostsEstimate';
 function Hosts() {
     const router = useRouter();
     const [overlay, setOverlay] = useState('');
-    const [userLat, setUserLat] = useState();
-    const [userLong, setUserLong] = useState();
+    const [userLat, setUserLat] = useState(51.43258577998574);
+    const [userLong, setUserLong] = useState(-0.19565271801491235);
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -22,11 +22,25 @@ function Hosts() {
                 setUserLat(position.coords.latitude)
                 setUserLong(position.coords.longitude)
                 console.log(position.coords.latitude, position.coords.longitude)
-            })
+            });
         } else {
             setUserLat(51.43258577998574)
             setUserLong(-0.19565271801491235)
         }
+
+        // function fetchIPBasedLocation() {
+        //     fetch('https://ipapi.co/json/')
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             setUserLat(data.latitude);
+        //             setUserLong(data.longitude);
+        //         })
+        //         .catch(error => {
+        //             console.error('Error fetching IP-based location:', error);
+        //         });
+        // }
+        
+        // fetchIPBasedLocation();
     }, [])
 
     useEffect(() => {
@@ -69,7 +83,7 @@ function Hosts() {
                 <HostsInput estimate={() => setOverlay('estimate')}/>
 
                 <div className='w-full h-[370px] sm:inline-flex lg:min-w-[600px] sm:h-[600px] rounded-2xl overflow-hidden'>
-                    <MapComp useLat={userLat} userLong={userLong} />
+                    <MapComp userLat={userLat} userLong={userLong} userZoom={13} />
                 </div>
             </section>
 
