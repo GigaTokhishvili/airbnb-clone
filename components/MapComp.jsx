@@ -11,9 +11,10 @@ function MapComp({ userLat, userLong, userZoom }) {
   // lon -0.19565271801491235
 
   useEffect(() => {
-    setLat(userLat)
-    setLng(userLong)
-    setZoom(userZoom)
+    userLat ? setLat(userLat) : setLat(51.43258577998574);
+    userLong ? setLng(userLong) : setLng(-0.19565271801491235);
+    userZoom ? setZoom(userZoom) : setZoom(11);
+
   }, [userLat, userLong, userZoom])
 
   return (

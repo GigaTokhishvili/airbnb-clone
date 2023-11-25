@@ -21,7 +21,6 @@ function Hosts() {
             navigator.geolocation.getCurrentPosition(position => {
                 setUserLat(position.coords.latitude)
                 setUserLong(position.coords.longitude)
-                console.log(position.coords.latitude, position.coords.longitude)
             });
         } else {
             setUserLat(51.43258577998574)

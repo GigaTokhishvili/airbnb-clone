@@ -43,7 +43,7 @@ function Header( {placeholder, writing, headerClosing} ) {
   }
 
   return (
-    <header className='sticky w-full top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10'>
+    <header onKeyDown={e => e.key === 'Enter' ? search() : null} className='sticky w-screen top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10'>
         <div className='relative flex items-center h-10 cursor-pointer my-auto'>
           <Image
             onClick={() => router.push('/')}

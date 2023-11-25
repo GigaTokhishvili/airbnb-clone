@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import londonData from '@/data/londonData';
 import Head from 'next/head';
+import InfoCardPale from '@/components/InfoCardPale';
 
 function Search({ initialSearchResults }) {
   const router = useRouter();
@@ -57,16 +58,16 @@ function Search({ initialSearchResults }) {
       <Head><title>Airbnb Listings (clone)</title></Head>
 
         <Header 
-          placeholder={`${location} | ${range} | ${guests} guests`}
+          placeholder={`${location} | ${range} | ${guests} ${guests == 1 ? 'guest' : 'guests'}`}
         />
 
         <main className='flex'>
           <section className='flex-grow pt-14 px-6'>
-            <p className='text-xs'>300+ Stays - {range} for {guests} guests</p>
+            <p className='text-xs'>300+ Stays - {range} for {guests} {guests == 1 ? 'guest' : 'guests'}</p>
 
             <h1 className='text-3xl font-semibold mt-2 mb-6'>Stays in {location}</h1>
 
-            <div className='hidden lg:inline-flex mb-5 space-x-3 text-gray-800 whitespace-nowrap'>
+            <div className='hidden border-b lg:inline-flex pb-5 space-x-3 text-gray-800 whitespace-nowrap'>
               <p className='button'>Cancellation Flexibility</p>
               <p className='button'>Type of Place</p>
               <p className='button'>Price</p>
@@ -74,10 +75,8 @@ function Search({ initialSearchResults }) {
               <p className='button'>More filters</p>
             </div>
 
-
-
             <div className='flex flex-col'>
-              {data?.results?.map((item) => (
+            {!data ? <InfoCardPale /> : data.results.map((item) => (
                 <div key={item.id}>
                   <InfoCard
                     key={item.id}
@@ -94,7 +93,8 @@ function Search({ initialSearchResults }) {
                     roomLng={item.longitude}
                   />
                 </div>
-              ))}
+              ))
+              }
               
             </div>
 

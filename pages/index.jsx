@@ -5,6 +5,7 @@ import LargeCard from "@/components/LargeCard";
 import MediumCard from "@/components/MediumCard";
 import SmallCard from "@/components/SmallCard";
 import Head from "next/head";
+import Image from "next/image";
 
 export default function Home({ exploreData, cardsData }) {
   return (
@@ -52,8 +53,12 @@ export default function Home({ exploreData, cardsData }) {
   );
 }
 
+// https://www.jsonkeeper.com/b/XX97 new
+
+// https://www.jsonkeeper.com/b/ZAQ0 old
+
 export async function getStaticProps() {
-  const exploreData = await fetch("https://www.jsonkeeper.com/b/ZAQ0").then(
+  const exploreData = await fetch("https://www.jsonkeeper.com/b/XX97").then(
     (res) => res.json()
   );
 

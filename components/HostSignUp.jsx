@@ -3,16 +3,28 @@ import countryData from '../data/countryData.js';
 
 function HostSignUp({ signUp }) {
     const [countryValue, setCountryValue] = useState('United Kingdom (+44)');
-    const [phoneValue, setPhoneValue] = useState();
+    const [phoneValue, setPhoneValue] = useState('');
     const [selectedCountry, setSelectedCountry] = useState(93);
     const [typing, setTyping] = useState(150);
+    const [numbShort, setNumbShort] = useState(false);
+    const [invalidNumb, setInvalidNumb] = useState(false);
 
     const handleChange = (e) => {
-            const input = e.target;
-            const formattedValue = input.value.replace(/[^0-9\s+\-()]/g, '');
-            input.value = formattedValue;
-            setPhoneValue(formattedValue);
+        const input = e.target;
+        const formattedValue = input.value.replace(/[^0-9\s+\-()]/g, '');
+        input.value = formattedValue;
+        setPhoneValue(formattedValue);
     }
+
+    const handleContinue = () => {
+        if (phoneValue.length > 6 && phoneValue.length < 18) {
+            setInvalidNumb(true);
+        } else {
+            setNumbShort(true);
+        }
+    }
+
+    
     return (
         <div onClick={() => signUp()} className='fixed left-0 top-0 w-full h-full bg-neutral-600 bg-opacity-50 z-[100] flex justify-center items-center'>
 
@@ -62,12 +74,13 @@ function HostSignUp({ signUp }) {
                             <div className='w-full h-14'>
                                 <label htmlFor="countries" className='relative'>
                                     {typing == 100 && <div className='absolute left-[17px] top-[-1px]'>{selectedCountry}</div>}
-                                    <div className='text-slate-500 pointer-events-none scale-100 text-xs absolute left-[17px] origin-top-left transition transform duration-150' style={{transform: `scale(${typing}%) translateY(${typing-90}%)`}}>Phone number</div>
+                                    <div className='pointer-events-none scale-100 text-xs absolute left-[17px] origin-top-left transition transform duration-150' style={{transform: `scale(${typing}%) translateY(${typing-90}%)`, color: `${invalidNumb || numbShort ? 'red' : 'rgb(100 116 139)'}`}}>Phone number</div>
 
                                     <input 
+                                    value={phoneValue}
                                     onChange={handleChange}
                                     onFocus={() => setTyping(100)}
-                                    onBlur={() => setTyping(150)}
+                                    onBlur={() => phoneValue.length > 0 ? setTyping(100) : setTyping(150)}
                                     name='phoneInput' 
                                     type="tel" 
                                     inputMode='tel' 
@@ -80,11 +93,25 @@ function HostSignUp({ signUp }) {
                         </div>
 
                     </div>
-                    <p className='text-xs text-gray-700'>We’ll call or text you to confirm your number. Standard message and data rates apply. 
-                        <a href='https://www.airbnb.co.uk/help/article/2855' target='_blank' className='underline text-black font-semibold cursor-pointer'>Privacy Policy</a>
-                    </p>
 
-                    <button className='w-full my-5 flex justify-center bg-gradient-to-r from-rose-600 via-rose-600 to-pink-600 px-6 py-3 gap-2 text-white font-semibold rounded-lg hover:shadow-lg active:scale-95 transition transform duration-75 ease-out'>
+                    {!numbShort ? <p className='text-xs text-gray-700'>We&apos;ll call or text you to confirm your number. Standard message and data rates apply. 
+                        <a href='https://www.airbnb.co.uk/help/article/2855' target='_blank' className='underline text-black font-semibold cursor-pointer'>Privacy Policy</a>
+                    </p> 
+                    : 
+                    <div className='pt-2 text-xs text-red-600'>
+                        ⚠️ Phone number is too short or contains invalid characters.
+                    </div> }
+
+                    {invalidNumb && 
+                        <div className='w-full flex items-center border-2 rounded-lg my-8 border-neutral-200 overflow-hidden'>
+                            <div className='px-3 py-4 flex justify-center items-center bg-orange-600'>
+                                <svg className='w-6 h-6 block fill-white' viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" ><path d="m23.49 20.79c.39.73.12 1.64-.61 2.03-.22.12-.46.18-.71.18h-20.33c-.83 0-1.5-.67-1.5-1.5 0-.25.06-.49.18-.71l10.16-18.94c.39-.73 1.3-1 2.03-.61.26.14.47.35.61.61zm-11.05-18.47c-.05-.09-.12-.16-.2-.2-.24-.13-.55-.04-.68.2l-10.16 18.94c-.04.07-.06.15-.06.24 0 .28.22.5.5.5h20.33c.08 0 .16-.02.24-.06.24-.13.33-.43.2-.68zm-.48 4.68c-.58.02-1.04.51-1.02 1.1l.29 7.42c.01.27.23.48.5.48h.54c.27 0 .49-.21.5-.48l.29-7.42c0-.01 0-.03 0-.04 0-.58-.47-1.06-1.06-1.06-.01 0-.03 0-.04 0zm-.96 12c0 .55.45 1 1 1s1-.45 1-1-.45-1-1-1-1 .45-1 1z"></path></svg>
+                            </div>
+                            <p className='text-sm px-3 font-medium tracking-tight'>We can't send a code to this phone number. Try using a different one.</p>
+                        </div> 
+                    }
+
+                    <button onClick={handleContinue} className='w-full my-5 flex justify-center bg-gradient-to-r from-rose-600 via-rose-600 to-pink-600 px-6 py-3 gap-2 text-white font-semibold rounded-lg hover:shadow-lg active:scale-95 transition transform duration-75 ease-out'>
                         Continue
                     </button>
 
