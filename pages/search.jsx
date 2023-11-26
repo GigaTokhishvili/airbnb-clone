@@ -15,6 +15,7 @@ function Search({ initialSearchResults }) {
 
   const [data, setData] = useState();
   const [days, setDays] = useState();
+  const [newLoc, setNewLoc] = useState();
 
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
@@ -26,6 +27,7 @@ function Search({ initialSearchResults }) {
     setDays(days);
   }
 
+  // theres a weird bug with getServerSideProps im trying to fix, hence me fetching data the normal way
   const fetchData = async () => {
     try {
       const response = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=15`);
@@ -47,6 +49,10 @@ function Search({ initialSearchResults }) {
     }
 
   }, [initialSearchResults])
+
+  const getNewLoc = (x, y) => {
+    setNewLoc([x, y])
+  }
 
   return (
     <div>
@@ -71,7 +77,7 @@ function Search({ initialSearchResults }) {
             </div>
 
             <div className='flex flex-col '>
-            {!data ? 
+            {!initialSearchResults ? 
               <>
                 <InfoCardPale />
                 <InfoCardPale />
@@ -79,7 +85,7 @@ function Search({ initialSearchResults }) {
                 <InfoCardPale />
                 <InfoCardPale />
               </>  : 
-              data.results.map((item) => (
+              initialSearchResults.results.map((item) => (
                 <div key={item.id}>
                   <InfoCard
                     key={item.id}
@@ -94,6 +100,7 @@ function Search({ initialSearchResults }) {
                     roomType={item.room_type}
                     roomLat={item.latitude}
                     roomLng={item.longitude}
+                    roomLocation={(x, y) => getNewLoc(x, y)}
                   />
                 </div>
             ))}
@@ -103,7 +110,7 @@ function Search({ initialSearchResults }) {
           </section>
 
           <section className='hidden xl:inline-flex xl:min-w-[600px] xl:h-screen sticky right-0 top-[92px]'>
-            <MapComp data={data}/>
+            <MapComp data={data} initialSearchResults={initialSearchResults} setNewLoc={newLoc} />
           </section>
         </main>
 

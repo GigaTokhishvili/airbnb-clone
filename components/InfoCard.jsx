@@ -10,7 +10,7 @@ function InfoCard(props) {
     }
 
   return (
-    <div className='flex flex-col md:flex-row py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out '>
+    <div onClick={() => props.roomLocation(props.roomLat, props.roomLng)} className='flex flex-col md:flex-row py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out '>
         <div className='relative mb-5 h-60 w-full md:h-52 md:w-80 flex-shrink-0'>
             <Image
                 loading='eager'
