@@ -28,7 +28,7 @@ function Search({ initialSearchResults }) {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`);
+      const response = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=15`);
       const searchData = await response.json();
       setData(searchData);
     } catch (error) {
@@ -48,11 +48,6 @@ function Search({ initialSearchResults }) {
 
   }, [initialSearchResults])
 
-
-  if (!data) {
-    return <div className='flex justify-center items-center h-screen bg-gray-200'><h1 className='text-6xl'>Loading...</h1></div>
-  }
-
   return (
     <div>
       <Head><title>Airbnb Listings (clone)</title></Head>
@@ -67,7 +62,7 @@ function Search({ initialSearchResults }) {
 
             <h1 className='text-3xl font-semibold mt-2 mb-6'>Stays in {location}</h1>
 
-            <div className='hidden border-b lg:inline-flex pb-5 space-x-3 text-gray-800 whitespace-nowrap'>
+            <div className='hidden w-80 border-b lg:inline-flex pb-5 space-x-3 text-gray-800 whitespace-nowrap'>
               <p className='button'>Cancellation Flexibility</p>
               <p className='button'>Type of Place</p>
               <p className='button'>Price</p>
@@ -75,8 +70,16 @@ function Search({ initialSearchResults }) {
               <p className='button'>More filters</p>
             </div>
 
-            <div className='flex flex-col'>
-            {!data ? <InfoCardPale /> : data.results.map((item) => (
+            <div className='flex flex-col '>
+            {!data ? 
+              <>
+                <InfoCardPale />
+                <InfoCardPale />
+                <InfoCardPale />
+                <InfoCardPale />
+                <InfoCardPale />
+              </>  : 
+              data.results.map((item) => (
                 <div key={item.id}>
                   <InfoCard
                     key={item.id}
@@ -93,8 +96,7 @@ function Search({ initialSearchResults }) {
                     roomLng={item.longitude}
                   />
                 </div>
-              ))
-              }
+            ))}
               
             </div>
 
@@ -125,7 +127,7 @@ export async function getServerSideProps(context) {
   const { location } = query;
 
   try {
-    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=20`).then(res => res.json())
+    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=15`).then(res => res.json())
 
     return {
       props: {

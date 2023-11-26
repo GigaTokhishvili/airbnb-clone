@@ -6,12 +6,13 @@ function LargeCard({ img, title, description, buttonText }) {
     <div className='relative py-16 cursor-pointer'>
         <div className='relative h-96 min-w-[300px]'>
             <Image 
-                src={img}
-                fill='false'
-                style={{objectFit: 'cover',}}
-                className='rounded-2xl'
-                alt='decorative img'
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              loading='lazy'
+              src={img}
+              fill='false'
+              style={{objectFit: 'cover',}}
+              className='rounded-2xl'
+              alt='decorative img'
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
         </div>
 

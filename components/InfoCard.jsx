@@ -10,9 +10,10 @@ function InfoCard(props) {
     }
 
   return (
-    <div className='flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out '>
-        <div className='relative h24 w-40 md:h-52 md:w-80 flex-shrink-0'>
-            <Image 
+    <div className='flex flex-col md:flex-row py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out '>
+        <div className='relative mb-5 h-60 w-full md:h-52 md:w-80 flex-shrink-0'>
+            <Image
+                loading='eager'
                 alt='Room Image'
                 fill='false'
                 src={props.img}
@@ -22,17 +23,17 @@ function InfoCard(props) {
             />
         </div>
 
-        <div className='flex flex-col flex-grow pl-5'>
+        <div className='flex flex-col flex-grow md:pl-5'>
             <div className='flex justify-between'>
                 <p>{props.name}</p>
                 <HeartIcon className='h-7 cursor-pointer' />
             </div>
 
-            <h4 className='text-xl text-gray-500'>{props.city}. {props.roomType}. {props.amenity1}. {props.amenity2}. {props.amenity3}   </h4>
+            <h4 className='text-xl text-gray-500'>{props.city}. {props.roomType}</h4>
 
             <div className='border-b w-10 pt-2'/>
 
-            <p className='pt-2 text-sm text-gray-500 flex-grow'>{truncate(props.description, 500)}</p>
+            <p className='hidden sm:inline-flex pt-2 text-sm text-gray-500 flex-grow'>{truncate(props.description, 400)}</p>
 
             <div className='flex justify-between items-end pt-5'>
                 <p className='flex items-center'>

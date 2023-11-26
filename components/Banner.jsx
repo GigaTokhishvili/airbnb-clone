@@ -17,13 +17,15 @@ function Banner() {
     })
   }
   return (
-    <div className='relative h-[300px] sm:h-[400px] lg:h-[500px] xl:[600px] 2xl:h[700px] bg-slate-500'>
-        <Image 
-            src='https://links.papareact.com/0fm'
-            fill='false'
-            style={{objectFit: "cover"}}
-            alt='banner image'
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    <div className='relative select-none h-[300px] sm:h-[400px] lg:h-[500px] xl:[600px] 2xl:h[700px] bg-slate-500'>
+        <Image
+          priority={true}
+          loading='eager'
+          src='https://links.papareact.com/0fm'
+          fill='false'
+          style={{objectFit: "cover"}}
+          alt='banner image'
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className='absolute top-1/2 w-full text-center'>
             <p className='text-sm sm:text-lg'>Not sure where to go? Perfect.</p>

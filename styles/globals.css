@@ -20,6 +20,13 @@
         animation-name: slideEnter;
     }
 
+    .scaleEnter {
+        animation-duration: 400ms;
+        animation-iteration-count: 1;
+        animation-fill-mode: both;
+        animation-name: scaleEnter;
+    }
+
     .signUpDiv {
         -webkit-box-align: center !important;
         display: flex !important;
@@ -52,6 +59,10 @@
         color: grey;
     }
 
+    .shadowRound {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
     @keyframes slideEnter {
         0% {
             opacity: 0;
@@ -61,6 +72,16 @@
         100% {
             opacity: 1;
             transform: none;
+        }
+    }
+    
+    @keyframes scaleEnter {
+        0% {
+            transform: scale(0%);
+        }
+
+        100% {
+            transform: scale(100%);
         }
     }
 }
