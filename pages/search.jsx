@@ -16,7 +16,6 @@ function Search({ initialSearchResults }) {
   const [data, setData] = useState();
   const [days, setDays] = useState();
   const [newLoc, setNewLoc] = useState('');
-  console.log(initialSearchResults.results)
 
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
