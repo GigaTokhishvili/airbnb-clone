@@ -30,9 +30,9 @@ function Search({ initialSearchResults }) {
   // theres a weird bug with getServerSideProps im trying to fix, hence me fetching data the normal way
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=15`).then(res => res.json());
-      searchData ? setData(response) : setData(londonData);
-      console.log(response)
+      const response = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=15`);
+      const searchData = await response.json();
+      searchData ? setData(searchData) : setData(londonData);
     } catch (error) {
       console.error(error)
       setData(londonData);
