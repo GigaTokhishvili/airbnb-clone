@@ -20,8 +20,16 @@ function MapComp({ data, setNewLoc, userLat, userLong, userZoom }) {
   }, [userLat, userLong, userZoom])
 
   useEffect(() => {
+    let center = [];
+    if (data?.total_count == 0) {
+      console.log('asdads')
+      center = [-0.19565271801491235, 51.43258577998574]
+    } else {
+      center = [data?.results[0].longitude, data?.results[0].latitude]
+    }
+
     mapRef.current?.flyTo({
-      center: [!data ? -0.19565271801491235 : data?.results[0].longitude, !data ? 51.43258577998574 : data?.results[0].latitude],
+      center: center,
       curve: 1.2,
       essential: true,
       maxDuration: 15000,
