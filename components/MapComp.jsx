@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map, { Marker } from 'react-map-gl';
 
-function MapComp({ initialSearchResults, setNewLoc, userLat, userLong, userZoom }) {
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
+function MapComp({ initialSearchResults, data, setNewLoc, userLat, userLong, userZoom }) {
+  const [lat, setLat] = useState('51.43258577998574');
+  const [lng, setLng] = useState('-0.19565271801491235');
   const [zoom, setZoom] = useState(11);
   const mapRef = useRef(null)
 
@@ -12,22 +12,22 @@ function MapComp({ initialSearchResults, setNewLoc, userLat, userLong, userZoom 
   // lon -0.19565271801491235
 
   useEffect(() => {
-    userLat ? setLat(userLat) : setLat(initialSearchResults.results[2].latitude);
-    userLong ? setLng(userLong) : setLng(initialSearchResults.results[2].longitude);
+    userLat ? setLat(userLat) : setLat(initialSearchResults?.results[2].latitude);
+    userLong ? setLng(userLong) : setLng(initialSearchResults?.results[2].longitude);
     userZoom ? setZoom(userZoom) : setZoom(12);
 
   }, [userLat, userLong, userZoom])
 
   useEffect(() => {
     mapRef.current?.flyTo({
-      center: [initialSearchResults.results[3].longitude, initialSearchResults.results[3].latitude],
+      center: [data?.results[3].longitude, data?.results[3].latitude],
       curve: 1.2,
       essential: true,
       maxDuration: 15000,
       zoom:15,
     })
    
-  }, [initialSearchResults])
+  }, [data])
 
   useEffect(() => {
     mapRef.current?.flyTo({
@@ -50,18 +50,13 @@ function MapComp({ initialSearchResults, setNewLoc, userLat, userLong, userZoom 
       zoom= {zoom}
       mapStyle='mapbox://styles/dumbledore-rules/cloqgs23j00kh01qy0qi60c8c'
       mapboxAccessToken={process.env.mapbox_key}
-      transition= {{
-        "duration": 300,
-        "delay": 0
-      }
-      }
       onMove={(e) => {
         setLng(e.viewState.longitude);
         setLat(e.viewState.latitude);
         setZoom(e.viewState.zoom);
       }}
     >
-      {initialSearchResults?.results.map((results) => {
+      {data?.results.map((results) => {
         return (     
             <Marker
               key={results.longitude}

@@ -77,7 +77,7 @@ function Search({ initialSearchResults }) {
             </div>
 
             <div className='flex flex-col '>
-            {!initialSearchResults ? 
+            {!data ? 
               <>
                 <InfoCardPale />
                 <InfoCardPale />
@@ -85,7 +85,7 @@ function Search({ initialSearchResults }) {
                 <InfoCardPale />
                 <InfoCardPale />
               </>  : 
-              initialSearchResults.results.map((item) => (
+              data.results.map((item) => (
                 <div key={item.id}>
                   <InfoCard
                     key={item.id}
@@ -110,7 +110,7 @@ function Search({ initialSearchResults }) {
           </section>
 
           <section className='hidden xl:inline-flex xl:min-w-[600px] xl:h-screen sticky right-0 top-[92px]'>
-            <MapComp initialSearchResults={initialSearchResults} setNewLoc={newLoc} />
+            <MapComp data={data} initialSearchResults={initialSearchResults} setNewLoc={newLoc} />
           </section>
         </main>
 
