@@ -12,8 +12,11 @@ function MapComp({ initialSearchResults, data, setNewLoc, userLat, userLong, use
   // lon -0.19565271801491235
 
   useEffect(() => {
-    userLat ? setLat(userLat) : setLat(initialSearchResults?.results[2].latitude);
-    userLong ? setLng(userLong) : setLng(initialSearchResults?.results[2].longitude);
+    // userLat ? setLat(userLat) : setLat(initialSearchResults?.results[2].latitude);
+    // userLong ? setLng(userLong) : setLng(initialSearchResults?.results[2].longitude);
+    userLat ? setLat(userLat) : setLat(51.43258577998574);
+    userLong ? setLng(userLong) : setLng(-0.19565271801491235);
+
     userZoom ? setZoom(userZoom) : setZoom(12);
 
   }, [userLat, userLong, userZoom])
