@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map, { Marker } from 'react-map-gl';
 
-function MapComp({ initialSearchResults, data, setNewLoc, userLat, userLong, userZoom }) {
+function MapComp({ data, setNewLoc, userLat, userLong, userZoom }) {
   const [lat, setLat] = useState('51.43258577998574');
   const [lng, setLng] = useState('-0.19565271801491235');
   const [zoom, setZoom] = useState(11);

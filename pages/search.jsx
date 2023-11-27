@@ -16,6 +16,7 @@ function Search({ initialSearchResults }) {
   const [data, setData] = useState();
   const [days, setDays] = useState();
   const [newLoc, setNewLoc] = useState('');
+  console.log(initialSearchResults.results)
 
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
@@ -48,7 +49,7 @@ function Search({ initialSearchResults }) {
       setData(initialSearchResults)
     }
 
-  }, [initialSearchResults])
+  }, [initialSearchResults, location])
 
   const getNewLoc = (x, y) => {
     setNewLoc([x, y])
@@ -85,7 +86,7 @@ function Search({ initialSearchResults }) {
                 <InfoCardPale />
                 <InfoCardPale />
               </>  : 
-              data.results.map((item) => (
+              data?.results.map((item) => (
                 <div key={item.id}>
                   <InfoCard
                     key={item.id}
@@ -110,7 +111,7 @@ function Search({ initialSearchResults }) {
           </section>
 
           <section className='hidden xl:inline-flex xl:min-w-[600px] xl:h-screen sticky right-0 top-[92px]'>
-            <MapComp data={data} initialSearchResults={initialSearchResults} setNewLoc={newLoc} />
+            <MapComp data={data} setNewLoc={newLoc} />
           </section>
         </main>
 
@@ -134,7 +135,7 @@ export async function getServerSideProps(context) {
   const { location } = query;
 
   try {
-    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=15`).then(res => res.json())
+    const searchResults = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=${encodeURIComponent(`"${location}"`)}&limit=15`).then(res => res.json());
 
     return {
       props: {
