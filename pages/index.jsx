@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import LargeCard from "@/components/LargeCard";
 import MediumCard from "@/components/MediumCard";
 import SmallCard from "@/components/SmallCard";
+import { UserCircleIcon } from "@heroicons/react/solid";
 import Head from "next/head";
 
 export default function Home({ exploreData, cardsData }) {

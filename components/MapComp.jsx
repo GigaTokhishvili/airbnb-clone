@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map, { Marker } from 'react-map-gl';
 
-function MapComp({ data, initialSearchResults, setNewLoc, userLat, userLong, userZoom }) {
+function MapComp({ initialSearchResults, setNewLoc, userLat, userLong, userZoom }) {
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
   const [zoom, setZoom] = useState(11);
@@ -20,7 +20,18 @@ function MapComp({ data, initialSearchResults, setNewLoc, userLat, userLong, use
 
   useEffect(() => {
     mapRef.current?.flyTo({
-      center:  [setNewLoc[1], setNewLoc[0]],
+      center: [initialSearchResults.results[3].longitude, initialSearchResults.results[3].latitude],
+      curve: 1.2,
+      essential: true,
+      maxDuration: 15000,
+      zoom:15,
+    })
+   
+  }, [initialSearchResults])
+
+  useEffect(() => {
+    mapRef.current?.flyTo({
+      center: [setNewLoc[1], setNewLoc[0]],
       curve: 1.2,
       essential: true,
       maxDuration: 15000,
@@ -50,7 +61,7 @@ function MapComp({ data, initialSearchResults, setNewLoc, userLat, userLong, use
         setZoom(e.viewState.zoom);
       }}
     >
-      {data?.results.map((results) => {
+      {initialSearchResults?.results.map((results) => {
         return (     
             <Marker
               key={results.longitude}

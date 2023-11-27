@@ -49,8 +49,9 @@ function Header( {placeholder} ) {
 
   return (
     <header onKeyDown={e => e.key === 'Enter' ? search() : null} className='sticky w-full h-20 top-0 flex flex-col z-50 gap-2 bg-white shadow-md py-5 sm:h-fit xl:px-60'>
+
         <nav className='flex px-8 h-fit justify-between'>
-          <div className='relative flex items-center h-10 w-36 cursor-pointer my-auto'>
+          <div className='relative flex items-center h-10 w-24 sm:w-36 cursor-pointer my-auto'>
             <Image
               onClick={() => router.push('/')}
               src='https://links.papareact.com/qd3'
@@ -118,6 +119,9 @@ function Header( {placeholder} ) {
               <button onClick={search} className='flex-grow text-red-400'>Search</button>
             </div>
         </div>}
+      <div className="fixed w-11 bg-white rounded-full h-11 right-5 bottom-5 sm:hidden">
+        <UserCircleIcon onClick={() => setOverlay('signUp')} className="fill-rose-500" />
+      </div>
     </header>
   )
 }

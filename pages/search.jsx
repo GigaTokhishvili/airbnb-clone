@@ -15,7 +15,7 @@ function Search({ initialSearchResults }) {
 
   const [data, setData] = useState();
   const [days, setDays] = useState();
-  const [newLoc, setNewLoc] = useState();
+  const [newLoc, setNewLoc] = useState('');
 
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
@@ -110,7 +110,7 @@ function Search({ initialSearchResults }) {
           </section>
 
           <section className='hidden xl:inline-flex xl:min-w-[600px] xl:h-screen sticky right-0 top-[92px]'>
-            <MapComp data={data} initialSearchResults={initialSearchResults} setNewLoc={newLoc} />
+            <MapComp initialSearchResults={initialSearchResults} setNewLoc={newLoc} />
           </section>
         </main>
 
