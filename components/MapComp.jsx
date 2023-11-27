@@ -23,7 +23,7 @@ function MapComp({ data, setNewLoc, userLat, userLong, userZoom }) {
 
   useEffect(() => {
     mapRef.current?.flyTo({
-      center: [data?.results[3].longitude, data?.results[3].latitude],
+      center: [data?.results[0].longitude, data?.results[0].latitude] || [51.43258577998574, -0.19565271801491235],
       curve: 1.2,
       essential: true,
       maxDuration: 15000,
