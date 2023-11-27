@@ -12,8 +12,6 @@ function MapComp({ data, setNewLoc, userLat, userLong, userZoom }) {
   // lon -0.19565271801491235
 
   useEffect(() => {
-    // userLat ? setLat(userLat) : setLat(initialSearchResults?.results[2].latitude);
-    // userLong ? setLng(userLong) : setLng(initialSearchResults?.results[2].longitude);
     userLat ? setLat(userLat) : setLat(51.43258577998574);
     userLong ? setLng(userLong) : setLng(-0.19565271801491235);
 
@@ -23,7 +21,7 @@ function MapComp({ data, setNewLoc, userLat, userLong, userZoom }) {
 
   useEffect(() => {
     mapRef.current?.flyTo({
-      center: [data?.results[0].longitude, data?.results[0].latitude] || [51.43258577998574, -0.19565271801491235],
+      center: [!data ? -0.19565271801491235 : data?.results[0].longitude, !data ? 51.43258577998574 : data?.results[0].latitude],
       curve: 1.2,
       essential: true,
       maxDuration: 15000,
