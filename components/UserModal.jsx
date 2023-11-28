@@ -17,13 +17,13 @@ function UserModal({ changeOverlay }) {
             <li onClick={() => changeOverlay('signUp')} className='cursor-pointer px-4 py-2 hover:bg-neutral-100'>Log in</li>
         </div>
         <li className='cursor-pointer px-4 py-2 hover:bg-neutral-100'>
-            <a href="https://www.airbnb.co.uk/giftcards" target='_blank'>
+            <a className='pr-[140px] py-2' href="https://www.airbnb.co.uk/giftcards" target='_blank'>
                 Gift cards
             </a>
         </li>
         <li onClick={() => router.push('/hosts')} className='cursor-pointer px-4 py-2 hover:bg-neutral-100' >Airbnb your home</li>
         <li className='cursor-pointer px-4 py-2 hover:bg-neutral-100'>
-            <a href="https://www.airbnb.co.uk/help?audience=guest" target='_blank'>
+            <a className='pr-[120px] py-2' href="https://www.airbnb.co.uk/help?audience=guest" target='_blank'>
                 Help center
             </a>
         </li>
